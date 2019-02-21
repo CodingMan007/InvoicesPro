@@ -1,0 +1,53 @@
+
+@charset "UTF-8";
+
+.table tbody tr td{
+      overflow: hidden; 
+      text-overflow:ellipsis;  
+      white-space: nowrap; 
+ }
+.table-hover > tbody > tr:hover {
+	background-color: #f69a70;
+}
+
+.div1 {
+	width: auto;
+	height: 650px;
+	background: #feffff;
+	position: relative;
+}
+
+.div2 {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -200px;
+	margin-left: -600px;
+	width: 1200px;
+	height: 350px;
+	background: #f4d1f8;
+	line-height: 350px;
+	font-size: 36px;
+	text-align: center;
+	vertical-align: middle;
+    display: table-cell;
+    filter:alpha(Opacity=90);
+    -moz-opacity:0.95;
+    opacity: 0.95;
+	
+}
+.img{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.div2 a:hover img{
+	filter:alpha(Opacity=80);
+	-moz-opacity:0.3;
+	opacity: 0.3;
+} 
+a{ text-decoration:none} 
+
+

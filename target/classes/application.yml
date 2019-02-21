@@ -1,0 +1,24 @@
+#server:
+#  port: 7902
+spring:
+  datasource:
+    platform: MYSQL
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+  jpa:
+    generate-ddl: false
+    database: MYSQL
+    show-sql: true
+  #Hibernate ddl auto (validate|create|create-drop|update)
+    hibernate:
+      ddl-auto: none
+logging:
+  path: H:\Workspace\log
+  level:
+    root: INFO
+    com.ydc.excel_to_db: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+  pattern:
+    file: :%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} === - %msg%n

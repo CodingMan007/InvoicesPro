@@ -1,0 +1,4 @@
+com/ydc/excel/testExcel.class
+com/ydc/excel_db/FromDbToExcelTest01.class
+com/ydc/excel_db/FromOneSheetToExcel.class
+com/ydc/excel_to_db/ExcelToDbApplicationTests.class

@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>开票服务平台</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myslef.css}"/>
+</head>
+<script th:src="@{/jquery/jquery.min.js}"></script>
+<script th:src="@{/layui/laydate/laydate.js}"></script>
+<script th:src="@{/layui/layui.all.js}"></script>
+<script th:src="@{/js/public.min.js}"></script>
+
+<script th:src="@{/js/avalon.js}"></script>
+
+<script th:src="@{/js/importscript.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+<body ms-controller="importviewmodel" onload="initloading()">
+		<div id="">
+			<!-- 内容主体区域 -->
+			<div id="test10">
+				<table class="table table-bordered text-nowrap table-hover" id="table">
+				    <thead>
+				    <tr>
+				        <td class="success"></td>
+				        <td class="success">id</td>
+				        <td class="success">单号</td>
+				        <td class="success">名称</td>
+				        <td class="success">规格</td>
+				        <td class="success">销售日期</td>
+				        <td class="success">客户名称</td>
+				        <td class="success">数量</td>
+				        <td class="success">计量单位</td>
+				        <td class="success">不含税单价</td>
+				        <td class="success">不含税金额</td>
+				        <td class="success">税前货款</td>
+				        <td class="success">税金</td>
+				    </tr>
+				    </thead>
+				    <tbody>
+				    <tr ms-for="el in @datalist" onclick="getTDtext()">
+				        <td data-checkbox="true">
+				         <input type="checkbox" name="getvalue" onclick="getTDtext()"/>
+				        </td>
+				        <td name="id">{{el.id}}</td>
+				        <td >{{el.indentnumber}}</td>
+				        <td >{{el.name}}</td>
+				        <td >{{el.specification}}</td>
+				        <td >{{el.saledate}}</td>
+				        <td >{{el.customername}}</td>
+				        <td >{{el.quantity}}</td>
+				        <td >{{el.measurementunit}}</td>
+				        <td  name="hsje">{{el.taxincludedprice}}</td>
+				        <td >{{el.taxincludedamount}}</td>
+				        <td >{{el.pretax}}</td>
+				        <td >{{el.taxes}}</td>
+				    </tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				    </tbody>
+				</table>
+				<div class="btn-primary" align="center">
+					<span class="text-center label label-warning">所选ID号</span>
+					<label id="resultID" style="color: grout;"></label>
+					
+					<span class="text-center label" th:text="${msg}" style="display: none;"></span>
+					<button type="button" class="btn btn-primary" style="margin: 10px;" ms-click="@request">{{@text}}</button>
+					<span class="input-group-btn label label-warning">含税总额：</span>
+					<label id="resultvalu" ></label>
+				</div>
+			</div>
+		</div>
+</body>
+
+<script>
+	//定义一个avalonjs的控制器
+	var importviewmodel = avalon.define({
+		//id必须和页面上定义的ms-controller名字相同，否则无法控制页面
+		$id : "importviewmodel",
+		datalist : {},
+		datalistfind : {},
+		text : "重生成发票",
+		request : function() {
+				var _getpageid = $("#resultID").text();
+				if (_getpageid != "") {
+					$.ajax({
+						type : "post",
+						url : "/invoicesinfo/putInvoicesSpecificationID/"
+								+ _getpageid +"/IsG",//向springboot请求数据的url IsG 表示已生发票操作类型
+						data : {},
+						success : function(data) {
+							importviewmodel.datalist = data;
+							console.log(data);
+							layer.msg("恭喜您！您选择的己生成发票数据已重新生成发票成功!");
+							getTDtext();
+							$("[name=getvalue]:checkbox").prop("checked", false);
+							$("#resultID").html("");
+							$("#resultvalu").html("");
+						}
+					});
+	
+				} else {
+					layer.msg("请选择要重新生成发票的数据...");
+				}
+	
+			}
+		});
+</script>
+</html>
