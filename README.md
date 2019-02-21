@@ -3,3 +3,9 @@
 
 # 技术栈
   SpringBoot+EasyPoi+Redis消息队列实现Excel批量异步导入数据库
+  
+  
+  
+  # 注意
+        数据格式
+        redis环境
